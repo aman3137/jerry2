@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Please Tell</title>
+<style>
+p {
+  text-align: center;
+  font-size: 32px;
+  font-family: Candara, Oswald;
+}
+
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 40%;
+  border: 2px solid #960df1;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;}
+
+  .text-container {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+#botao1 {
+  position: fixed;
+  top: 70%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  background-color: #40ff43;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#botao2 {
+  position: absolute;
+  left: 39%;
+  top: 68%;
+  font-size: 24px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  background-color: #ff4081;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: rippleEffect 0.6s linear;
+}
+
+@keyframes rippleEffect {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+#rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('https://i.pinimg.com/originals/c1/a9/3a/c1a93a1d0de0059a3119b8b1a55ce582.gif');
+}
+
+@keyframes rain {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 0px 500px;}
+}
+
+</style>
+</head>
+<body>
+  <div id="rain"></div>
+  <div class="text-container">
+    <p>Will you give me a pizza party?</p>
+  </div>
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzhkZDhjNGUzNjQzNDljYzhjMzcxYzBjMTI0YTllMWU0OGY3NGRmZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/noyBeNjH4nbtXV5ZLA/giphy.gif">
+
+  <button id="botao1" class="ripple">YES💞</button>
+  <button id="botao2">NO👅</button>
+
+<script>
+const button1 = document.getElementById('botao1');
+const button2 = document.getElementById('botao2');
+
+button1.addEventListener('click', function(e) {
+  e.preventDefault();
+  alert('yeee I know you will give me a pizza party 😎😎 !!!❤️');
+  button1.classList.add('ripple');
+});
+
+button2.addEventListener('mouseover', function() {
+  const maxWidth = window.innerWidth - this.offsetWidth;
+  const maxHeight = window.innerHeight - this.offsetHeight;
+  const newLeft = Math.floor(Math.random() * maxWidth);
+  const newTop = Math.floor(Math.random() * maxHeight);
+  
+  this.style.left = newLeft + 'px';
+  this.style.top = newTop + 'px';
+});
+
+button1.addEventListener('mousedown', function(e) {
+  const ripple = button1.querySelector('.ripple');
+  const rect = button1.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.classList.remove('ripple');
+  void ripple.offsetWidth;
+  ripple.classList.add('ripple');
+});
+
+</script>
+</body>
+</html>
